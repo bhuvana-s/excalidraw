@@ -1,12 +1,12 @@
 /**
  * AIConfigurationService
- * 
+ *
  * Manages LLM provider credentials and model selection.
  * Stores credentials securely in browser LocalStorage.
  * Supports OpenAI, GCP Gemini, AWS Claude, and Ollama providers.
  */
 
-export type LLMProvider = 'openai' | 'gemini' | 'claude' | 'ollama';
+export type LLMProvider = "openai" | "gemini" | "claude" | "ollama";
 
 export interface ProviderCredentials {
   provider: LLMProvider;
@@ -66,13 +66,13 @@ interface StoredModelCache {
 }
 
 const STORAGE_KEYS = {
-  CREDENTIALS: 'excalidraw_ai_credentials',
-  SELECTED_PROVIDER: 'excalidraw_ai_selected_provider',
-  SELECTED_MODEL: 'excalidraw_ai_selected_model',
-  MODEL_CACHE: 'excalidraw_ai_model_cache',
+  CREDENTIALS: "excalidraw_ai_credentials",
+  SELECTED_PROVIDER: "excalidraw_ai_selected_provider",
+  SELECTED_MODEL: "excalidraw_ai_selected_model",
+  MODEL_CACHE: "excalidraw_ai_model_cache",
 } as const;
 
-const STORAGE_VERSION = '1.0.0';
+const STORAGE_VERSION = "1.0.0";
 const MODEL_CACHE_TTL_MS = 24 * 60 * 60 * 1000; // 24 hours
 
 /**
@@ -80,37 +80,37 @@ const MODEL_CACHE_TTL_MS = 24 * 60 * 60 * 1000; // 24 hours
  * Note: This is basic obfuscation. For production, consider using Web Crypto API
  */
 class CredentialEncryption {
-  private static readonly KEY = 'excalidraw-ai-key';
+  private static readonly KEY = "excalidraw-ai-key";
 
   static encrypt(data: string): string {
     // Base64 encode with simple XOR cipher
     const encoded = btoa(data);
     return btoa(
       encoded
-        .split('')
+        .split("")
         .map((char, i) =>
           String.fromCharCode(
             char.charCodeAt(0) ^ this.KEY.charCodeAt(i % this.KEY.length),
           ),
         )
-        .join(''),
+        .join(""),
     );
   }
 
   static decrypt(encrypted: string): string {
     try {
       const decoded = atob(encrypted)
-        .split('')
+        .split("")
         .map((char, i) =>
           String.fromCharCode(
             char.charCodeAt(0) ^ this.KEY.charCodeAt(i % this.KEY.length),
           ),
         )
-        .join('');
+        .join("");
       return atob(decoded);
     } catch (error) {
-      console.error('Failed to decrypt credentials:', error);
-      return '';
+      console.error("Failed to decrypt credentials:", error);
+      return "";
     }
   }
 }
@@ -121,7 +121,7 @@ export class AIConfigurationService {
    */
   async saveCredentials(
     provider: LLMProvider,
-    credentials: ProviderCredentials['credentials'],
+    credentials: ProviderCredentials["credentials"],
   ): Promise<void> {
     try {
       // Validate credentials before saving
@@ -152,7 +152,7 @@ export class AIConfigurationService {
    */
   async getCredentials(
     provider: LLMProvider,
-  ): Promise<ProviderCredentials['credentials'] | null> {
+  ): Promise<ProviderCredentials["credentials"] | null> {
     try {
       const stored = this.getStoredCredentials();
       const providerData = stored.providers[provider];
@@ -213,8 +213,8 @@ export class AIConfigurationService {
     if (!credentials) {
       return {
         success: false,
-        message: 'No credentials found',
-        error: 'Please configure credentials first',
+        message: "No credentials found",
+        error: "Please configure credentials first",
       };
     }
 
@@ -228,7 +228,7 @@ export class AIConfigurationService {
     // Actual connection test will be implemented by LLM adapters
     return {
       success: true,
-      message: 'Connection test will be implemented by LLM adapters',
+      message: "Connection test will be implemented by LLM adapters",
     };
   }
 
@@ -375,7 +375,7 @@ export class AIConfigurationService {
       }
       return JSON.parse(stored);
     } catch (error) {
-      console.error('Failed to parse stored credentials:', error);
+      console.error("Failed to parse stored credentials:", error);
       return {
         version: STORAGE_VERSION,
         providers: {},
@@ -394,7 +394,7 @@ export class AIConfigurationService {
       }
       return JSON.parse(stored);
     } catch (error) {
-      console.error('Failed to parse model cache:', error);
+      console.error("Failed to parse model cache:", error);
       return {};
     }
   }
@@ -404,39 +404,39 @@ export class AIConfigurationService {
    */
   private validateCredentials(
     provider: LLMProvider,
-    credentials: ProviderCredentials['credentials'],
+    credentials: ProviderCredentials["credentials"],
   ): void {
     switch (provider) {
-      case 'openai':
+      case "openai":
         if (!credentials.apiKey) {
-          throw new Error('OpenAI API key is required');
+          throw new Error("OpenAI API key is required");
         }
         break;
-      case 'gemini':
+      case "gemini":
         if (!credentials.geminiApiKey) {
-          throw new Error('Gemini API key is required');
+          throw new Error("Gemini API key is required");
         }
         break;
-      case 'claude':
+      case "claude":
         if (
           !credentials.awsClientId ||
           !credentials.awsClientSecret ||
           !credentials.awsRegion
         ) {
           throw new Error(
-            'AWS Client ID, Secret, and Region are required for Claude',
+            "AWS Client ID, Secret, and Region are required for Claude",
           );
         }
         break;
-      case 'ollama':
+      case "ollama":
         if (!credentials.ollamaEndpoint) {
-          throw new Error('Ollama endpoint is required');
+          throw new Error("Ollama endpoint is required");
         }
         // Validate URL format
         try {
           new URL(credentials.ollamaEndpoint);
         } catch {
-          throw new Error('Invalid Ollama endpoint URL');
+          throw new Error("Invalid Ollama endpoint URL");
         }
         break;
       default:

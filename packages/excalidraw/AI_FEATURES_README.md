@@ -22,7 +22,7 @@ function MyApp() {
   return (
     <div>
       <Excalidraw
-        // ... your props
+      // ... your props
       />
       <AIFeatureIntegration
         elements={elements}
@@ -48,7 +48,10 @@ import { AIConfigButton, ImageImportButton } from "@excalidraw/excalidraw/ai-fea
 ### Option 3: Use Actions
 
 ```tsx
-import { actionConfigureAI, actionImportImage } from "@excalidraw/excalidraw/ai-features";
+import {
+  actionConfigureAI,
+  actionImportImage,
+} from "@excalidraw/excalidraw/ai-features";
 
 // Actions are automatically registered
 // Keyboard shortcuts:
@@ -73,11 +76,8 @@ function MyApp() {
     );
 
     const newElements = await convertMermaidToElements(mermaidCode);
-    const { elements: updated, appState: updatedState } = insertElementsIntoCanvas(
-      newElements,
-      appState,
-      elements
-    );
+    const { elements: updated, appState: updatedState } =
+      insertElementsIntoCanvas(newElements, appState, elements);
 
     setElements(updated);
     setAppState(updatedState);
@@ -167,7 +167,7 @@ const mermaidCode = await conversionOrchestrationService.startConversion(
   processedImage[0],
   {
     progressCallback: (status) => console.log(status.message),
-  }
+  },
 );
 ```
 
@@ -206,20 +206,24 @@ The components use CSS custom properties for theming. Ensure these variables are
 ## Troubleshooting
 
 ### "No AI provider configured" error
+
 - User needs to configure at least one provider first
 - Open AI Configuration dialog and complete setup
 
 ### "Connection failed" error
+
 - Check API credentials are correct
 - Verify network connectivity
 - For Ollama, ensure service is running locally
 
 ### "Failed to convert diagram" error
+
 - Image may be too complex or unclear
 - Try with a clearer/simpler diagram
 - Check LLM provider has vision capabilities
 
 ### Mermaid syntax errors
+
 - The service includes auto-correction
 - Users can manually edit generated code
 - Retry conversion with different settings
@@ -227,6 +231,7 @@ The components use CSS custom properties for theming. Ensure these variables are
 ## Dependencies
 
 Required packages:
+
 - `@excalidraw/mermaid-to-excalidraw` - For mermaid conversion
 - `jotai` - For state management (use app-specific modules)
 - `react` - React 19.0.0+
@@ -238,6 +243,7 @@ MIT - Same as Excalidraw
 ## Support
 
 For issues or questions:
+
 1. Check the troubleshooting section above
 2. Review the implementation summary in `aidlc-docs/construction/IMPLEMENTATION_SUMMARY.md`
 3. Open an issue on GitHub
