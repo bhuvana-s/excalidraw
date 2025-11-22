@@ -1,9 +1,10 @@
 // Quick test for Mermaid parsing
+// Uncomment imports and code below to test
 
-import { parseMermaidFlowchart } from "./mermaidParser";
-import { calculateLayout } from "./mermaidLayout";
+// import { parseMermaidFlowchart } from "./mermaidParser";
+// import { calculateLayout } from "./mermaidLayout";
 
-const testCode = `graph TD
+// const testCode = `graph TD
 subgraph Frontend
 WI[Web Interface]
 end

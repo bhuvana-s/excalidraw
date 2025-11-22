@@ -5,7 +5,8 @@
  */
 
 import React, { useState } from "react";
-import { useAtom } from "jotai";
+
+import { useAtom } from "../editor-jotai";
 import {
   imageToMermaidDialogOpenAtom,
   conversionProgressAtom,
@@ -13,10 +14,10 @@ import {
   showConfigPromptAtom,
   aiConfigDialogOpenAtom,
 } from "../editor-jotai";
+
 import { imageProcessingService } from "../services/ImageProcessingService";
 import { conversionOrchestrationService } from "../services/ConversionOrchestrationService";
 import { aiConfigService } from "../services/AIConfigurationService";
-
 import { Dialog } from "./Dialog";
 import "./ImageToMermaidDialog.scss";
 

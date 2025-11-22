@@ -6,7 +6,8 @@
  */
 
 import React, { useState, useEffect } from "react";
-import { useAtom } from "jotai";
+
+import { useAtom } from "../editor-jotai";
 import {
   aiConfigDialogOpenAtom,
   aiConfiguredProvidersAtom,
@@ -14,12 +15,11 @@ import {
   aiSelectedModelAtom,
   aiAvailableModelsAtom,
 } from "../editor-jotai";
-import { aiConfigService } from "../services/AIConfigurationService";
 
+import { aiConfigService } from "../services/AIConfigurationService";
 import type {
   LLMProvider,
   ModelInfo,
-  ProviderCredentials,
 } from "../services/AIConfigurationService";
 
 import { llmVisionService } from "../services/LLMVisionService";
