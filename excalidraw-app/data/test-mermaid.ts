@@ -35,15 +35,10 @@ GA --> GEM
 PS --> GEM
 PS --> APP`;
 
-console.log("Testing Mermaid Parser...");
-try {
-  const graph = parseMermaidFlowchart(testCode);
-  console.log("Parsed graph:", graph);
-  console.log("Nodes:", graph.nodes.length);
-  console.log("Edges:", graph.edges.length);
-
-  const layout = calculateLayout(graph);
-  console.log("Layout calculated:", layout.length, "nodes");
-} catch (error) {
-  console.error("Error:", error);
-}
+// Test code - uncomment to run
+// try {
+//   const graph = parseMermaidFlowchart(testCode);
+//   const layout = calculateLayout(graph);
+// } catch (error) {
+//   // Handle error
+// }
