@@ -123,8 +123,7 @@ export const MobileToolBar = ({
   const laserToolSelected = activeTool.type === "laser";
   const embeddableToolSelected = activeTool.type === "embeddable";
 
-  const { TTDDialogTriggerTunnel, ImageToMermaidDialogTriggerTunnel } =
-    useTunnels();
+  const { TTDDialogTriggerTunnel, ImageToMermaidDialogTriggerTunnel } = useTunnels();
 
   const handleToolChange = (toolType: string, pointerType?: string) => {
     if (app.state.activeTool.type !== toolType) {
@@ -466,9 +465,7 @@ export const MobileToolBar = ({
           >
             {t("toolBar.mermaidToExcalidraw")}
           </DropdownMenu.Item>
-          {app.props.aiEnabled !== false && (
-            <ImageToMermaidDialogTriggerTunnel.Out />
-          )}
+          {app.props.aiEnabled !== false && <ImageToMermaidDialogTriggerTunnel.Out />}
           {app.props.aiEnabled !== false && app.plugins.diagramToCode && (
             <>
               <DropdownMenu.Item

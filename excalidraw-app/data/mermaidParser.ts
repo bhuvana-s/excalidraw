@@ -24,7 +24,7 @@ export interface MermaidGraph {
  */
 export function parseMermaidFlowchart(mermaidCode: string): MermaidGraph {
   // Normalize the code: add newlines before keywords if missing
-  const normalizedCode = mermaidCode
+  let normalizedCode = mermaidCode
     .replace(/subgraph/g, "\nsubgraph")
     .replace(/end(?!A)/g, "\nend\n") // end keyword but not endA, endB etc
     .replace(/graph\s+(TD|LR|BT|RL)/g, "graph $1\n");
@@ -51,11 +51,7 @@ export function parseMermaidFlowchart(mermaidCode: string): MermaidGraph {
 
   // Parse nodes and edges
   for (const line of lines) {
-    if (
-      line.startsWith("graph") ||
-      line.startsWith("subgraph") ||
-      line === "end"
-    ) {
+    if (line.startsWith("graph") || line.startsWith("subgraph") || line === "end") {
       continue;
     }
 
@@ -83,7 +79,7 @@ export function parseMermaidFlowchart(mermaidCode: string): MermaidGraph {
     }
 
     // Parse node definition: A[Label] or A(Label) or A{Label} or A[/Label/]
-    const nodeMatch = line.match(/(\w+)([[(/{])([^\])}]+)([\])}/])/);
+    const nodeMatch = line.match(/(\w+)([\[\(\{\/])([^\]\)\}]+)([\]\)\}\/])/);
     if (nodeMatch) {
       const [, id, openBracket, label] = nodeMatch;
       let shape: MermaidNode["shape"] = "rectangle";

@@ -25,6 +25,14 @@ export const EditorJotaiProvider: ReturnType<
 
 export const editorJotaiStore: ReturnType<typeof createStore> = createStore();
 
+// AI Configuration Atoms
+import type {
+  LLMProvider,
+  ModelInfo,
+  ConfigurationStatus,
+} from "./services/AIConfigurationService";
+import type { ConversionStatus } from "./services/ConversionOrchestrationService";
+
 /**
  * AI Configuration Dialog State
  */

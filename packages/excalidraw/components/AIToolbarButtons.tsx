@@ -1,20 +1,15 @@
 /**
  * AIToolbarButtons
- *
+ * 
  * Toolbar buttons for AI features
  */
 
 import React, { useEffect, useState } from "react";
-
-import { useAtom } from "../editor-jotai";
-import {
-  aiConfigDialogOpenAtom,
-  imageToMermaidDialogOpenAtom,
-} from "../editor-jotai";
-import { aiConfigService } from "../services/AIConfigurationService";
-
-import { Tooltip } from "./Tooltip";
 import { ToolButton } from "./ToolButton";
+import { Tooltip } from "./Tooltip";
+import { useAtom } from "../editor-jotai";
+import { aiConfigDialogOpenAtom, imageToMermaidDialogOpenAtom } from "../editor-jotai";
+import { aiConfigService } from "../services/AIConfigurationService";
 
 // Simple SVG icons
 const ConfigIcon = () => (
@@ -56,10 +51,7 @@ export const ImageImportButton: React.FC = () => {
   const [, setDialogOpen] = useAtom(imageToMermaidDialogOpenAtom);
 
   return (
-    <Tooltip
-      label="Import Image to Diagram (Ctrl+Shift+I)"
-      style={{ height: "100%" }}
-    >
+    <Tooltip label="Import Image to Diagram (Ctrl+Shift+I)" style={{ height: "100%" }}>
       <ToolButton
         type="button"
         icon={<ImageImportIcon />}
