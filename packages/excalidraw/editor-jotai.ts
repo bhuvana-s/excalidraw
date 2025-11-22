@@ -16,12 +16,6 @@ import type {
 import type { ConversionStatus } from "./services/ConversionOrchestrationService";
 
 // AI Configuration Atoms
-import type {
-  LLMProvider,
-  ModelInfo,
-  ConfigurationStatus,
-} from "./services/AIConfigurationService";
-import type { ConversionStatus } from "./services/ConversionOrchestrationService";
 
 const jotai = createIsolation();
 

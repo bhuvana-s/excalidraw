@@ -2,11 +2,10 @@ import { trackEvent } from "../analytics";
 import { useTunnels } from "../context/tunnels";
 
 import { imageToMermaidDialogOpenAtom } from "../editor-jotai";
+import type { Store } from "../editor-jotai";
 
 import DropdownMenu from "./dropdownMenu/DropdownMenu";
 import { ImageIcon } from "./icons";
-
-import type { Store } from "jotai";
 
 import type { JSX, ReactNode } from "react";
 
